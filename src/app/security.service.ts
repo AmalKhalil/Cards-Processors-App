@@ -8,6 +8,7 @@ import { User } from './user';
 export class SecurityService {
   authenticated = false;
   authorization = null;
+  userName = null;
   role = null;
   constructor(private http: HttpClient) { }
   login(user,  callback) {
@@ -18,6 +19,7 @@ export class SecurityService {
             if (response['id']) {
                 this.authenticated = true;
                 this.role = response['role'];
+                this.userName = response['userName'];
             } else {
                 this.authenticated = false;
             }

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { FileUploader, FileSelectDirective , Headers} from 'ng2-file-upload/ng2-file-upload';
 import { JsonPipe } from '@angular/common';
 import { Observable ,  Subscription } from 'rxjs';
@@ -22,7 +22,8 @@ export class MerchantComponent implements OnInit, OnDestroy {
   private subscribed: boolean;
   batches: Batch[] = [];
   isMerchant = false;
-  constructor(private _stompService: StompService,
+  constructor(private changeDetectorRef: ChangeDetectorRef,
+              private _stompService: StompService,
               private securityService: SecurityService,
               private batchService: BatchService,
               private messageService: MessageService) {
@@ -64,11 +65,11 @@ export class MerchantComponent implements OnInit, OnDestroy {
     }
 
     // Stream of messages
-    this.messages = this._stompService.subscribe('/merchant');
+    this.messages = this._stompService.subscribe('/user/' + this.securityService.userName + '/reply');
 
     // Subscribe a function to be run on_next message
     this.subscription = this.messages.subscribe(this.onMessageRecieved);
-
+console.log('2' + this.subscription);
     this.subscribed = true;
   }
 
@@ -89,7 +90,15 @@ export class MerchantComponent implements OnInit, OnDestroy {
 
 
   public onMessageRecieved = (message: Message) => {
-    this.batchService.getBatches().subscribe(batches => this.batches = batches);
+    this.batchService.getBatches().subscribe(batches => this.setBatches(batches));
     console.log(message);
+  }
+
+  private setBatches(batches) {
+    this.batches = batches;
+    this.changeDetectorRef.detectChanges();
+    this.messageService.add('Batch Result is ready');
+    
+
   }
 }
