@@ -98,7 +98,5 @@ console.log('2' + this.subscription);
     this.batches = batches;
     this.changeDetectorRef.detectChanges();
     this.messageService.add('Batch Result is ready');
-    
-
   }
 }
