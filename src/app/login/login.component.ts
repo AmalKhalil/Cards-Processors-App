@@ -23,9 +23,15 @@ export class LoginComponent implements OnInit {
               private location: Location,
               private router: Router) { }
   signIn():  void {
-   this.messageService.add('Login .....');
-   this.securityService.login(this.user);
-   this.router.navigateByUrl('merchants');
+   this.messageService.add('Login in progress .....');
+   this.securityService.login(this.user, (error) => {
+        this.messageService.clear();
+        if (this.securityService.authenticated) {
+          this.router.navigateByUrl('merchants');
+        } else {
+          this.messageService.add(error);
+        }
+    });
   }
   ngOnInit() {
 
