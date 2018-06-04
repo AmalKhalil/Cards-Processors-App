@@ -2,4 +2,4 @@ const express = require('express')
 const app = express()
 
 
-app.listen(80, () => console.log('Example app listening on port 80!'))
+app.listen($PORT, () => console.log('Example app listening on port 80!'))
