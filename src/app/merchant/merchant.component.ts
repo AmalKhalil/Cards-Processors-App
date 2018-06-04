@@ -26,7 +26,7 @@ export class MerchantComponent implements OnInit, OnDestroy {
               private _stompService: StompService,
               private securityService: SecurityService,
               private batchService: BatchService,
-              private messageService: MessageService) {
+              public messageService: MessageService) {
   }
   public uploader: FileUploader = new FileUploader({url: 'http://127.0.0.1:8080/services/batch', itemAlias: 'file',
     headers : [ {name : 'authorization' , value: this.securityService.authorization}]});
