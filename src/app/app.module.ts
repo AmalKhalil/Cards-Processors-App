@@ -30,7 +30,6 @@ const stompConfig: StompConfig = {
 @NgModule({
   declarations: [
     AppComponent,
-    FileSelectDirective,
     MerchantComponent,
     LoginComponent,
     MessagesComponent
