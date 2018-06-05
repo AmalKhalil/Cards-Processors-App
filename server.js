@@ -9,6 +9,8 @@ app.get('/*', (req, res) => {
     
 	if('/' === req.url)
 		res.sendFile(path.join(__dirname, 'dist/cards-processors-app/index.html'));
+	else
+		res.sendFile(path.join(__dirname, 'dist/cards-processors-app' + req.url));
  });
 
 app.listen(port, () => console.log('Example app listening on port ' + port))
