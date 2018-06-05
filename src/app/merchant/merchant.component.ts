@@ -36,10 +36,9 @@ export class MerchantComponent implements OnInit, OnDestroy {
       file.withCredentials = false;
     };
     this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
-      console.log('File uploaded:', item, status, response);
-      this.messageService.clear();
       const responseObject = JSON.parse(response);
-     if (responseObject['errorMessage']) {
+      this.messageService.clear();
+      if (responseObject['errorMessage']) {
           this.messageService.add( responseObject['errorMessage']);
        } else {
           this.messageService.add('File uploaded successfully');
@@ -94,7 +93,7 @@ export class MerchantComponent implements OnInit, OnDestroy {
 
   private setBatches(batches) {
     this.batches = batches;
+    alert('Batch Result is ready');
     this.changeDetectorRef.detectChanges();
-    this.messageService.add('Batch Result is ready');
   }
 }
