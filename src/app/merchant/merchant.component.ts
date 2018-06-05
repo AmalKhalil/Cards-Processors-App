@@ -9,6 +9,7 @@ import { SecurityService} from '../security.service';
 import { BatchService} from '../batch.service';
 import { MessageService} from '../message.service';
 import { Batch } from '../batch';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-merchant',
@@ -28,7 +29,7 @@ export class MerchantComponent implements OnInit, OnDestroy {
               private batchService: BatchService,
               public messageService: MessageService) {
   }
-  public uploader: FileUploader = new FileUploader({url: 'http://127.0.0.1:8080/services/batch', itemAlias: 'file',
+  public uploader: FileUploader = new FileUploader({url: environment.backendUrl + 'services/batch', itemAlias: 'file',
     headers : [ {name : 'authorization' , value: this.securityService.authorization}]});
   ngOnInit() {
     this.uploader.onAfterAddingFile = (file) => {

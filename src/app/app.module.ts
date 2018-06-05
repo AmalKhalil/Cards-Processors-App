@@ -12,9 +12,11 @@ import { MerchantComponent } from './merchant/merchant.component';
 import { MessagesComponent } from './messages/messages.component';
 import { AppRoutingModule } from './/app-routing.module';
 import * as SockJS from 'sockjs-client';
+import { environment } from '../environments/environment';
+
 
 const stompConfig: StompConfig = {
-  url: new SockJS('http://127.0.0.1:8080/socket'),
+  url: new SockJS(environment.backendUrl + 'socket'),
 
   headers: {
     login: '',
