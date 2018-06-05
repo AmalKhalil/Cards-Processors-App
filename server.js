@@ -5,6 +5,7 @@ const app = express()
 var port = process.env.PORT || 8080;
 app.use(express.static(path.join(__dirname, '/dist')));
 app.get('/*', (req, res) => {
+	console.log('__dirname  : '+__dirname);
    res.sendFile(path.join(__dirname, 'dist/cards-processors-app/index.html'));
  });
 
