@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {StompService} from '@stomp/ng2-stompjs';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Card Processor';
+  constructor(private _stompService: StompService) {
+  }
+  ngOnInit() {
+      this._stompService.initAndConnect();
+    }
+
 }
