@@ -54,10 +54,7 @@ export class MerchantComponent implements OnInit, OnDestroy {
   }
 
   public sendMessage() {
-    const _getRandomInt = (min, max) => {
-      return Math.floor(Math.random() * (max - min + 1)) + min;
-    };
-    this._stompService.publish('/merchant', 'In');
+    this._stompService.publish('/merchant', 'Subscribed');
   }
 
   private subscribe() {
@@ -70,7 +67,7 @@ export class MerchantComponent implements OnInit, OnDestroy {
 
     // Subscribe a function to be run on_next message
     this.subscription = this.messages.subscribe(this.onMessageRecieved);
-console.log('2' + this.subscription);
+
     this.subscribed = true;
   }
 
